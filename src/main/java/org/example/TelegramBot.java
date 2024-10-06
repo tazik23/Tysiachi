@@ -22,7 +22,21 @@ public class TelegramBot extends TelegramLongPollingBot {
         if(update.hasMessage() && update.getMessage().hasText()){
             Long chatId = update.getMessage().getChatId();
             String message = update.getMessage().getText();
+
+            switch(message) {
+                case "/start":
+                    sendGreetingMessage(chatId);
+                    break;
+                default:
+                    break;
+            }
         }
+    }
+
+    private void sendGreetingMessage(long chatID) {
+        String message = "Tysiachi - это бот, который помогает со сдачей \"Тысяч\". \n" +
+                "Он может помочь выбрать статью, перевести ее, а также сделать словарь.";
+        sendMessage(chatID, message);
     }
 
     private void sendMessage(long chatID, String messageToSend){
