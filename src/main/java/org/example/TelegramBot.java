@@ -26,11 +26,13 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     private void sendMessage(long chatID, String messageToSend){
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(String.valueOf(chatID));
-        sendMessage.setText(messageToSend);
+        SendMessage message = SendMessage
+                .builder()
+                .chatId(String.valueOf(chatID))
+                .text(messageToSend)
+                .build();
         try {
-            execute(sendMessage);
+            execute(message);
         }
         catch (TelegramApiException e) {
             e.printStackTrace();
